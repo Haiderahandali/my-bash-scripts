@@ -28,5 +28,5 @@ fi
 touch $ranName;
 
 
-myEditor $ranName
+$myEditor $ranName
 
