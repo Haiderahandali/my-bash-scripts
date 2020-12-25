@@ -15,3 +15,5 @@ to use this, just copy paste it in your
 .bash_profile file (usually it is in your HOME directory, if not you can create one) 
 and source it using the command: **source ~/.bash_profile**
 
+### mv_compile_commands
+This script find **compile_commands.json** in the directory the command was invoked from. If no argument are passed, it will copy the file to same directory it was invoked from. alternatively, you can pass a path as the first argument, to copy the **compile_commands.json** to that path.
