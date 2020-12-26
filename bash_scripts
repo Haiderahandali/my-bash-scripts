@@ -25,32 +25,25 @@ function cppcompile()
 
 generate_rubbish()
 {
-myEditor=sublime 		#you can put any editor that you launch from the shell/cmd here. 
+  myEditor=sublime 		#you can put any editor that you launch from the shell/cmd here. 
+  location=${HOME}/.tmp 	# you can change the location if you want.
+  chars=abcdefghijklmnbvczxqwer91231tyyuiopQAZXSWEDCVFRTGBNHYU099287123JM1234 # Random character to pick from
 
-location=${HOME}/.tmp 	# you can change the location if you want.
-
-chars=abcdefghijklmnbvczxqwer91231tyyuiopQAZXSWEDCVFRTGBNHYU099287123JM1234 # Random character to pick from
-
-
-if [[ $# -eq 1 ]]; then
-	ranName="$1"
-else
-
-	ranName="${chars:RANDOM%${#chars}:8}.cpp"
-fi
-
-
-cd ${HOME};
-if [[ -d .tmp ]]; then
-	cd .tmp;
-else
-	mkdir .tmp
-	cd .tmp
-fi
-touch $ranName;
-
-
-$myEditor $ranName
+  if [[ $# -eq 1 ]]; then
+    ranName="$1"
+  else
+    ranName="${chars:RANDOM%${#chars}:8}.cpp"
+  fi
+  cd ${HOME};
+  if [[ -d .tmp ]]; then
+      cd .tmp;
+  else
+      mkdir .tmp
+      cd .tmp
+  fi
+  
+  touch $ranName;
+  $myEditor $ranName
 
 }
 
@@ -58,10 +51,10 @@ $myEditor $ranName
 # ------------------ Find compile_commands.json and copy it to the top directory ----------- #
 
 mv_compile_commands() {
-if [[ $# -eq 1 ]]; then
-path=$1
-else
-path=.
-fi
-find . -name 'compile_commands.json' -exec cp {} $path \;
+  if [[ $# -eq 1 ]]; then
+  path=$1
+  else
+  path=.
+  fi
+  find . -name 'compile_commands.json' -exec cp {} $path \;
 }
