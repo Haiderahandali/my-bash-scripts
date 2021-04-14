@@ -61,3 +61,68 @@ mv_compile_commands() {
   fi
   find . -name 'compile_commands.json' -exec cp {} $path \;
 }
+
+
+function setup_sdl()
+
+{
+  set -ex;
+  #marco; #getting the current directory and save it
+  
+  myEditor=sublime     #you can put any editor that you launch from the shell/cmd here. 
+  location="${HOME}/.tmp"   # you can change the location if you want.
+
+  chars=abcdefghijklmnbvczxqwer91231tyyuiopQAZXSWEDCVFRTGBNHYU099287123JM1234 # Random character to pick from
+
+  if [[ $# -eq 1 ]]; then
+    ranName="$1"
+  else
+    ranName="${chars:RANDOM%${#chars}:8}"
+  fi
+
+
+  mkdir "$ranName";
+
+  cp -R "sdl_package/" "$ranName"
+
+  cd "$ranName";
+
+  mkdir build && cd build;
+  cmake -G "Ninja Multi-Config" ..
+  cd ..
+
+  if [[ $myEditor -eq "sublime" ]]; then
+    $myEditor random.sublime-project;
+  else
+    $myEditor .
+  fi
+
+set +ex;
+polo; #moving to original directory
+}
+
+
+
+
+
+function marco()
+{
+  currentDirectory=$(pwd)
+
+echo "Current directory is $currentDirectory"
+echo "$currentDirectory" > "${HOME}/.tmp/bash_script/marcoDirectory.txt"
+
+}
+function polo()
+{
+     next=$(cat "${HOME}/.tmp/bash_script/marcoDirectory.txt")
+    echo "Changing directory to $next"
+    cd "$next"
+
+}
+
+
+
+
+
+
